@@ -32,7 +32,7 @@ public class PlayState extends state{
         super(gsm);
         spr = new ShapeRenderer();
         fd = new ArtificalFood(new Vector2(0,0), new Vector2(0.1f,0.1f), new Vector2(100, 100), 20f, new Texture("Green.jpg"));
-        player = new ArtificalFood(new Vector2(0,0), new Vector2(0.2f,0.2f), new Vector2(0, 0), 20f, new Texture("Yellow.jpg"));
+        player = new ArtificalFood(new Vector2(800,400), new Vector2(0.2f,0.2f), new Vector2(0, 0), 20f, new Texture("Yellow.jpg"));
     }
 
 
@@ -53,8 +53,6 @@ public class PlayState extends state{
 
                 player.setPosition(new Vector2(Gdx.input.getX() - (player.getSprite().getTexture().getWidth()/2) * player.scale.x, (HugrySquare.HEIGHT - Gdx.input.getY()) - (player.getSprite().getTexture().getHeight()/2) * player.scale.y));
             }
-
-            System.out.println("" + HugrySquare.HEIGHT + " : " + Gdx.input.getY() + " : " + ((HugrySquare.HEIGHT ) - (Gdx.input.getY())));
         }
 
     }
@@ -70,6 +68,8 @@ public class PlayState extends state{
             fd.setTarget(new Vector2(10, 100));
         }
 
+
+        //System.out.println("" + HugrySquare.HEIGHT + " : " + Gdx.input.getY() + " : " + ((HugrySquare.HEIGHT ) - (Gdx.input.getY())) + " : " + player.position.y);
 
         handleInput();
 
