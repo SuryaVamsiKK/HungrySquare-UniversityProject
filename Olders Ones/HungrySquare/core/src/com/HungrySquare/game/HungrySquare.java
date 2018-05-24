@@ -1,7 +1,6 @@
 package com.HungrySquare.game;
 
 import com.HungrySquare.game.Managers.GameStatemanager;
-import com.HungrySquare.game.States.Menu;
 import com.HungrySquare.game.States.PlayState;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
@@ -12,19 +11,19 @@ import com.badlogic.gdx.math.MathUtils;
 
 public class HungrySquare extends ApplicationAdapter {
 
-	public static final int WIDTH = 1920;
-	public static final int HEIGHT = 1080;
+	public static final int WIDTH = 1080;
+	public static final int HEIGHT = 607;
 
 	private GameStatemanager gsm;
 	private SpriteBatch batch;
 
 	@Override
-public void create ()
+	public void create ()
 	{
 		batch = new SpriteBatch();
 		gsm = new GameStatemanager();
 		Gdx.gl.glClearColor(1, 1, 1, 1);
-		gsm.push(new Menu(gsm));
+		gsm.push(new PlayState(gsm));
 	}
 
 	@Override
@@ -48,12 +47,12 @@ public void create ()
 
 		if(r < probab)
 		{
-			rs = MathUtils.random(0.02f, ps);
+			rs = MathUtils.random(0.07f, ps);
 		}
 
 		if(r > probab)
 		{
-			rs = MathUtils.random(ps, 0.2f);
+			rs = MathUtils.random(ps, 0.5f);
 		}
 
 		return rs;

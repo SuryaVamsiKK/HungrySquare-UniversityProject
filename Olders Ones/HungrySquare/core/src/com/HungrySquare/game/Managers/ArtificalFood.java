@@ -1,6 +1,5 @@
 package com.HungrySquare.game.Managers;
 
-import com.HungrySquare.game.HungrySquare;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -12,7 +11,7 @@ public class ArtificalFood {
 
     public Vector2 position;
     public Vector2 scale;
-    public Vector2 target;
+    private Vector2 target;
     private float speed;
     private Vector2 velocity;
     private Sprite wrap;
@@ -50,8 +49,6 @@ public class ArtificalFood {
         verts = new float[]{-scale.x/2,-scale.y/2,scale.x/2,-scale.y/2,scale.x/2,scale.y/2,-scale.x/2,scale.y/2};
         wrap = new Sprite(tex);
         col = new Polygon(verts);
-        target.x = HungrySquare.WIDTH + wrap.getTexture().getWidth()*this.scale.x + 200f;
-        target.y = MathUtils.random(-200f, HungrySquare.HEIGHT + 200f);
         setTarget(target);
     }
 
@@ -78,7 +75,7 @@ public class ArtificalFood {
 
     public void move() {
 
-        if(distance(position, target) < 30) {
+        if(distance(position, target) < (((wrap.getTexture().getWidth()/2)*scale.x) * ((wrap.getTexture().getWidth()/2)*scale.x))) {
             reached = true;
         }
         else
@@ -86,7 +83,8 @@ public class ArtificalFood {
             position.x += velocity.x * Gdx.graphics.getDeltaTime();
             position.y += velocity.y * Gdx.graphics.getDeltaTime();
         }
-        //System.out.println(reached +" : "+distance(position, target));
+        System.out.println(reached);
+
         //System.out.println(distance(position, target));
     }
 
@@ -116,9 +114,7 @@ public class ArtificalFood {
         float dist;
         d.x = targ.x - pos.x;
         d.y = targ.y - pos.y;
-        dist = (float) Math.sqrt(
-                Math.pow(d.x, 2) +
-                        Math.pow(d.y, 2) );
+        dist = (d.x * d.x) + (d.y * d.y);
         return dist;
     }
 
@@ -127,7 +123,7 @@ public class ArtificalFood {
         return reached;
     }
 
-    public void addScale(Vector2 scl)
+    public void setScale(Vector2 scl)
     {
         scale.x += scl.x;
         scale.y += scl.y;
